@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Sayangku 💕</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comfortaa', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #feada6 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 15px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(15px);
+      padding: 30px 20px;
+      border-radius: 30px;
+      box-shadow: 0 20px 40px rgba(255, 77, 109, 0.35);
+      text-align: center;
+      max-width: 390px;
+      width: 100%;
+      border: 3px solid #ffffff;
+      position: relative;
+      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.4); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    /* Area Animasi Icon Berdenyut Lucu */
+    .icon-container {
+      height: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 5rem;
+      animation: heartPulse 1.5s infinite ease-in-out;
+    }
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      14% { transform: scale(1.12); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.08); }
+    }
+    h1 {
+      color: #ff3366;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+    .typing-text {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      min-height: 65px;
+      position: relative;
+    }
+    .typing-text::after {
+      content: '|';
+      color: #ff3366;
+      animation: blink 0.7s infinite;
+      font-weight: bold;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    /* Kotak Hadiah Bergetar */
+    .gift-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+    .gift-card {
+      width: 75px;
+      height: 80px;
+      background: linear-gradient(145deg, #ffffff, #ffe6eb);
+      border: 2.5px solid #ff4d6d;
+      border-radius: 20px;
+      font-size: 2.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(255, 77, 109, 0.2);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: shake 3s infinite ease-in-out;
+    }
+    .gift-card:nth-child(2) { animation-delay: 0.3s; }
+    .gift-card:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes shake {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      15% { transform: translateY(-6px) rotate(-8deg); }
+      30% { transform: translateY(0) rotate(8deg); }
+      45% { transform: translateY(-3px) rotate(-4deg); }
+      60% { transform: translateY(0) rotate(0deg); }
+    }
+    .gift-card:hover {
+      transform: scale(1.15) rotate(0deg) !important;
+      background: #ff4d6d;
+      color: white;
+      box-shadow: 0 12px 25px rgba(255, 77, 109, 0.4);
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      min-height: 55px;
+    }
+    .btn {
+      background: linear-gradient(45deg, #ff4e50, #f9d423);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(255, 78, 80, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-no {
+      background: #f1f1f1;
+      color: #777;
+      box-shadow: none;
+    }
+    .floating-heart {
+      position: absolute;
+      animation: floatUp 4s linear infinite;
+      z-index: -1;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Tahap 1: Pilihan Kotak Kejutan Bergetar -->
+    <div id="stage1">
+      <div class="icon-container">🧸</div>
+      <h1>Alooo Sayang! ✨</h1>
+      <p style="color: #555; margin-bottom: 10px;">Buka 1 hadiah di bawah ini buat liat pesannya! 🫣🎁</p>
+      
+      <div class="gift-boxes">
+        <div class="gift-card" onclick="selectBox(1)">🎁</div>
+        <div class="gift-card" onclick="selectBox(2)">🎁</div>
+        <div class="gift-card" onclick="selectBox(3)">🎁</div>
+      </div>
+    </div>
+
+    <!-- Tahap 2: Pesan Berantai + Icon Animasi CSS + Typing Effect -->
+    <div id="stage2" style="display: none;">
+      <div class="icon-container" id="iconDisplay">🥺</div>
+      <h1 id="cardTitle">Pesan Untuk Sayang</h1>
+      <div class="typing-text" id="cardText"></div>
+
+      <div class="btn-container" id="btnGroup">
+        <button class="btn" id="btnYes" onclick="nextMessage()">Iya dimaafin 💕</button>
+        <button class="btn btn-no" id="btnNo" onclick="shrinkNoBtn()">Gak Maafin 😜</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 0;
+    let typingTimer = null;
+    let yesScale = 1;
+    let noScale = 1;
+
+    // Nomor WhatsApp Kamu (6285794062355)
+    const myPhoneNumber = "6285794062355"; 
+
+    // Pesan, Animasi Icon Emoji, dan Alur Cerita
+    const messages = [
+      {
+        icon: "🥺",
+        title: "Maafin Aku Ya Sayang...",
+        text: "Aku minta maaf banget ya kalau udah bikin kamu kesal atau sedih. Janji deh gak bakal bikin kamu badmood lagi! 🤍",
+        btnYes: "Iya dimaafin 💕",
+        showNoBtn: true
+      },
+      {
+        icon: "🥰",
+        title: "Makasih Sayang! 🎉",
+        text: "Yayy! Makasih udah dimaafin! Kamu tuh emang yang paling baik dan paling aku sayang selamanya 🌸✨",
+        btnYes: "Lanjut ➡️",
+        showNoBtn: false
+      },
+      {
+        icon: "☺️",
+        title: "Senyum Dong! 💕",
+        text: "Sekarang coba senyum manis dulu dong sayang... Nah gitu kan makin cantik kalau senyum ❤️",
+        btnYes: "Udah senyum kok 💕",
+        showNoBtn: false
+      },
+      {
+        icon: "💖",
+        title: "I Love You So Much!",
+        text: "Makasih ya sayang udah baca sampai akhir. Jangan lupa kirim balasan chat buat aku yaa! 🫂✨",
+        btnYes: "Kirim Balasan 💌",
+        showNoBtn: false
+      }
+    ];
+
+    function typeEffect(text, elementId, speed = 40, callback) {
+      const element = document.getElementById(elementId);
+      element.innerHTML = "";
+      let i = 0;
+      clearInterval(typingTimer);
+
+      const btnYes = document.getElementById('btnYes');
+      btnYes.disabled = true;
+
+      typingTimer = setInterval(() => {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typingTimer);
+          btnYes.disabled = false;
+          if (callback) callback();
+        }
+      }, speed);
+    }
+
+    function selectBox(num) {
+      document.getElementById('stage1').style.display = 'none';
+      document.getElementById('stage2').style.display = 'block';
+      loadMessage(0);
+      createExplosion();
+    }
+
+    function loadMessage(index) {
+      const msg = messages[index];
+      document.getElementById('iconDisplay').innerText = msg.icon;
+      document.getElementById('cardTitle').innerText = msg.title;
+      document.getElementById('btnYes').innerText = msg.btnYes;
+
+      yesScale = 1;
+      noScale = 1;
+      const btnYes = document.getElementById('btnYes');
+      const btnNo = document.getElementById('btnNo');
+      
+      btnYes.style.transform = `scale(1)`;
+      btnNo.style.transform = `scale(1)`;
+      btnNo.style.display = msg.showNoBtn ? 'inline-block' : 'none';
+
+      typeEffect(msg.text, 'cardText');
+    }
+
+    // Efek Tombol "Gak Maafin 😜": makin diklik -> tombol Yes makin membesar, tombol No makin mengecil
+    function shrinkNoBtn() {
+      noScale -= 0.25;
+      yesScale += 0.25;
+
+      const btnYes = document.getElementById('btnYes');
+      const btnNo = document.getElementById('btnNo');
+
+      if (noScale <= 0.1) {
+        btnNo.style.display = 'none';
+      } else {
+        btnNo.style.transform = `scale(${noScale})`;
+      }
+
+      btnYes.style.transform = `scale(${yesScale})`;
+    }
+
+    function nextMessage() {
+      currentStep++;
+      if (currentStep < messages.length) {
+        loadMessage(currentStep);
+        createExplosion();
+      } else {
+        const replyText = encodeURIComponent("Iya sayang, udah aku maafin kok! Jangan merasa bersalah lagi yaa, I love you too ❤️✨");
+        window.location.href = `https://wa.me/${myPhoneNumber}?text=${replyText}`;
+      }
+    }
+
+    function createExplosion() {
+      const icons = ['💖', '🌸', '✨', '💕', '🥰', '🧸'];
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+        heart.className = 'floating-heart';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.top = (window.innerHeight - 50) + 'px';
+        heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3500);
+      }
+    }
+
+    setInterval(() => {
+      const bgHeart = document.createElement('div');
+      bgHeart.innerHTML = ['🤍', '💖', '🌸', '✨'][Math.floor(Math.random() * 4)];
+      bgHeart.className = 'floating-heart';
+      bgHeart.style.left = Math.random() * window.innerWidth + 'px';
+      bgHeart.style.bottom = '-20px';
+      document.body.appendChild(bgHeart);
+
+      setTimeout(() => bgHeart.remove(), 4000);
+    }, 700);
+  </script>
+</body>
+</html>
